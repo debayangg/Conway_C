@@ -7,4 +7,8 @@
 #define JUMP_LEFT 'b'
 #define JUMP_UP 21//crtl+u
 #define JUMP_DOWN 4 //ctrl+d
-#define CHANGE '\n'
+#define END '$'
+#define BEGINNING '0'
+#define TOP 'g'
+#define BOTTOM 'G'
+#define CHANGE ' '

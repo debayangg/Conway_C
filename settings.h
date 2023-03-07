@@ -2,7 +2,7 @@
 #define SETTINGS_H
 
 #define JUMP_DISTANCE 5 
-#define DEAD ' '
+#define DEAD 'o'
 #define ALIVE 'x'
 #define PADDING 10
 

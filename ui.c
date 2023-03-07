@@ -23,6 +23,9 @@ void* ui(void* arg){
 				else 
 					move(cursor_y,cursor_x=COLUMNS);
 				break;
+			case END:
+				move(cursor_y,cursor_x=COLUMNS);
+				break;
 			case MOVE_LEFT:
 				if(cursor_x>0)
 					move(cursor_y,--cursor_x);
@@ -36,6 +39,9 @@ void* ui(void* arg){
 					move(cursor_y,cursor_x=COLUMNS);
 				else
 					move(cursor_y,cursor_x=0);
+				break;
+			case BEGINNING:
+				move(cursor_y,cursor_x=0);
 				break;
 			case MOVE_UP:
 				if(cursor_y>0)
@@ -51,6 +57,9 @@ void* ui(void* arg){
 				else
 					move(cursor_y=0,cursor_x);
 				break;
+			case TOP:
+				move(cursor_y=0,cursor_x);
+				break;
 			case MOVE_DOWN:
 				if(cursor_y>ROWS)
 					move(cursor_y=0,cursor_x);
@@ -64,6 +73,9 @@ void* ui(void* arg){
 					move(cursor_y=0,cursor_x);
 				else
 					move(cursor_y=ROWS,cursor_x);
+				break;
+			case BOTTOM:
+				move(cursor_y=ROWS,cursor_x);
 				break;
 			case CHANGE:
 				if(is_alive(PADDING+cursor_y,PADDING+cursor_x)){
