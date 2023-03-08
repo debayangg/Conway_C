@@ -12,3 +12,4 @@
 #define TOP 'g'
 #define BOTTOM 'G'
 #define CHANGE ' '
+#define PLAY_PAUSE 'p'

@@ -1,9 +1,11 @@
 #include<ncurses.h>
+#include<stdbool.h>
+#include"ui.h"
 #include"settings.h"
 #include"keybindings.h"
 #include"controls.h"
 void* ui(void* arg){
-	char running=1;
+	bool running=true;
 	while(running){
 		switch(getch()){
 			case QUIT:
@@ -87,6 +89,9 @@ void* ui(void* arg){
 					addch(ALIVE);
 				}
 				move(cursor_y,cursor_x);
+				break;
+			case PLAY_PAUSE:
+				playing=1-playing;
 				break;
 		}
 		refresh();
