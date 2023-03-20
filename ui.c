@@ -5,11 +5,10 @@
 #include"keybindings.h"
 #include"controls.h"
 void* ui(void* arg){
-	bool running=true;
 	while(running){
 		switch(getch()){
 			case QUIT:
-				running=0;
+				running=FALSE;
 				break;
 			case MOVE_RIGHT:
 				if(cursor_x<COLUMNS)

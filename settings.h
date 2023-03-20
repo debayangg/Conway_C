@@ -5,5 +5,6 @@
 #define DEAD ' '
 #define ALIVE 'x'
 #define PADDING 10
+#define DEFAULT_FPS 0.4
 
 #endif

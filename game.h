@@ -2,7 +2,8 @@
 #define GAME_H
 
 extern WINDOW* surface;extern char* cells;
-extern bool playing;
+extern bool playing,running;
+extern double frame_speed;
 void game();
 
 #endif

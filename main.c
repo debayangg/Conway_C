@@ -11,18 +11,23 @@
 //globals
 WINDOW* surface;char* cells;
 unsigned short cursor_x,cursor_y;
-bool playing;
+double frame_speed,fps;
+bool playing,running;
+short RIGHTMOST,BOTTOMMOST;
 int main(){
 	surface=initscr();//create surface
 	noecho();//do not show keys
-	cells=(char*)calloc((COLUMNS/8+1+2*PADDING)*(ROWS+2*PADDING),1);
+	RIGHTMOST=COLUMNS+2*PADDING;
+	BOTTOMMOST=ROWS+2*PADDING;
+	cells=(char*)calloc((COLUMNS/8+1+2*PADDING)*(BOTTOMMOST),1);
 	for(short i=0;i<=(ROWS+1)*(COLUMNS+1);i++)
 			addch(DEAD);
 	unsigned short cursor_x=0,cursor_y=0;
 	move(0,0);
 	pthread_t ui_thread;
 	pthread_create(&ui_thread,NULL,ui,NULL);
-	playing=false;
+	playing=false,running=true;
+	frame_speed=1.0/DEFAULT_FPS;
 	game();
 	pthread_join(ui_thread,NULL);
 }
