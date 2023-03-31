@@ -3,8 +3,8 @@
 
 #define JUMP_DISTANCE 5 
 #define DEAD ' '
-#define ALIVE 'x'
+#define ALIVE 'o'
 #define PADDING 10
-#define DEFAULT_FPS 0.4
+#define DEFAULT_FPS 5.0
 
 #endif

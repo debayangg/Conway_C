@@ -79,7 +79,9 @@ void* ui(void* arg){
 				move(cursor_y=ROWS,cursor_x);
 				break;
 			case CHANGE:
-				if(is_alive(PADDING+cursor_y,PADDING+cursor_x)){
+				if(playing)
+					break;
+				else if(is_alive(PADDING+cursor_y,PADDING+cursor_x)){
 					death(PADDING+cursor_y,PADDING+cursor_x);
 					addch(DEAD);
 				}
@@ -90,10 +92,13 @@ void* ui(void* arg){
 				move(cursor_y,cursor_x);
 				break;
 			case PLAY_PAUSE:
+				curs_set(playing);//change cursor visibility
 				playing=1-playing;
+				move(cursor_y,cursor_x);
 				break;
 		}
 		refresh();
 	}
 	endwin();//clean terminal
+	curs_set(1);//make cursor normal
 }

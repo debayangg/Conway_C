@@ -13,13 +13,13 @@ WINDOW* surface;char* cells;
 unsigned short cursor_x,cursor_y;
 double frame_speed,fps;
 bool playing,running;
-short RIGHTMOST,BOTTOMMOST;
+unsigned short RIGHTMOST,BOTTOMMOST;
 int main(){
 	surface=initscr();//create surface
 	noecho();//do not show keys
 	RIGHTMOST=COLUMNS+2*PADDING;
 	BOTTOMMOST=ROWS+2*PADDING;
-	cells=(char*)calloc((COLUMNS/8+1+2*PADDING)*(BOTTOMMOST),1);
+	cells=(char*)calloc((RIGHTMOST/8+1)*(BOTTOMMOST),1);
 	for(short i=0;i<=(ROWS+1)*(COLUMNS+1);i++)
 			addch(DEAD);
 	unsigned short cursor_x=0,cursor_y=0;

@@ -5,7 +5,7 @@
 #include"settings.h"
 #include"controls.h"
 #include"game.h"
-#define IF_ONSCREEN() if(PADDING<tail->row && tail->row<=ROWS && PADDING<tail->column && tail->column<=COLUMNS)
+#define IF_ONSCREEN() if(PADDING<=tail->row && tail->row<=ROWS+PADDING && PADDING<=tail->column && tail->column<=COLUMNS+PADDING)
 typedef struct Change{//linked list node
 	bool new_state;
 	unsigned short row,column;
@@ -21,7 +21,6 @@ void rules(unsigned short row,unsigned short column,unsigned char neighbours){
 			change->new_state=false;//die
 			change->previous=tail;
 			tail=change;
-			printf("false:%d at %d,%d\n",change->new_state,change->row,change->column);//testing
 		}
 	}
 	else if(neighbours==3){//reproduction
@@ -30,7 +29,6 @@ void rules(unsigned short row,unsigned short column,unsigned char neighbours){
 		change->new_state=true;//be born
 		change->previous=tail;
 		tail=change;
-		printf("true:%d at %d,%d\n",change->row,change->column,change->new_state);//testing
 	}
 }
 void game(){
@@ -84,7 +82,7 @@ void game(){
 				);//right border
 			}
 				//interior
-			for(short i=1;i<BOTTOMMOST;)
+			for(short i=1;i<BOTTOMMOST;i++)
 				for(short j=1;j<RIGHTMOST;j++)
 					rules(i,j,
 						is_alive(i-1,j-1)+//top left,
@@ -93,12 +91,12 @@ void game(){
 						is_alive(i,j+1)+//bottom
 						is_alive(i,j-1)+//top
 						//'i' is incremented
-						is_alive(++i,j+1)+//bottom right
-						is_alive(i,j)+//right
-						is_alive(i,j-1)//top right
+						is_alive(i+1,j+1)+//bottom right
+						is_alive(i+1,j)+//right
+						is_alive(i+1,j-1)//top right
 					);
 			//create new generation
-			do{
+			while(tail!=NULL){
 				Change* new_tail;
 				if(tail->new_state){//cell alive on grid
 					birth(tail->row,tail->column);
@@ -113,11 +111,11 @@ void game(){
 				new_tail=tail->previous;
 				free(tail);
 				tail=new_tail;
-			}while(tail!=NULL);
+			}
 			refresh();
 		}
 		sleep_time=frame_speed-((double)(clock()-begin_frame))/CLOCKS_PER_SEC;
-		sleep_arg.tv_sec=(int)sleep_time;sleep_arg.tv_nsec=(long)(sleep_time-sleep_arg.tv_sec)*1000000000;
+		sleep_arg.tv_sec=(int)sleep_time;sleep_arg.tv_nsec=(long)((sleep_time-sleep_arg.tv_sec)*1000000000);
 		nanosleep(&sleep_arg,NULL);
 	}
 }
