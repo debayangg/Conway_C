@@ -39,7 +39,7 @@ void game(){
 	STRUCT_SIZE=sizeof(Change);
 	while(running){
 		begin_frame=clock();
-		if(playing){
+		if(playing || stepping){
 			//plan next frame, store Changes
 				//corners
 			rules(0,0,is_alive(0,1)+is_alive(1,1)+is_alive(1,0));//top left
@@ -111,6 +111,11 @@ void game(){
 				new_tail=tail->previous;
 				free(tail);
 				tail=new_tail;
+			}
+			if(stepping){
+				stepping=false;
+				curs_set(1);
+				move(cursor_y,cursor_x);
 			}
 			refresh();
 		}

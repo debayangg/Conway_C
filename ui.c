@@ -6,7 +6,7 @@
 #include"controls.h"
 void* ui(void* arg){
 	while(running){
-		switch(getch()){
+		switch(getch()){//respond to input
 			case QUIT:
 				running=FALSE;
 				break;
@@ -94,9 +94,17 @@ void* ui(void* arg){
 			case PLAY_PAUSE:
 				curs_set(playing);//change cursor visibility
 				playing=1-playing;
-				move(cursor_y,cursor_x);
+				if(!playing)
+					move(cursor_y,cursor_x);
+				break;
+			case NEXT:
+				if(!playing){
+					stepping=true;
+				curs_set(0);
+				}
 				break;
 		}
+		//TODO: prepare for size change events
 		refresh();
 	}
 	endwin();//clean terminal
