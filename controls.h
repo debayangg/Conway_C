@@ -4,6 +4,8 @@
 //macros
 #define ROWS surface->_maxy
 #define COLUMNS surface->_maxx
+#define ALIVE_COLOR 1
+#define DEAD_COLOR 2
 //variables
 extern WINDOW* surface;extern char* cells;
 extern unsigned short RIGHTMOST,BOTTOMMOST;

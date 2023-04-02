@@ -100,13 +100,17 @@ void game(){
 				Change* new_tail;
 				if(tail->new_state){//cell alive on grid
 					birth(tail->row,tail->column);
-					IF_ONSCREEN()
+					IF_ONSCREEN(){
+						attron(COLOR_PAIR(ALIVE_COLOR));
 						mvaddch(tail->row-PADDING,tail->column-PADDING,ALIVE);
+					}
 				}
 				else{//cell dead on grid
 					death(tail->row,tail->column);
-					IF_ONSCREEN()
+					IF_ONSCREEN(){
+						attron(COLOR_PAIR(DEAD_COLOR));
 						mvaddch(tail->row-PADDING,tail->column-PADDING,DEAD);
+					}
 				}
 				new_tail=tail->previous;
 				free(tail);

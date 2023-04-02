@@ -83,10 +83,12 @@ void* ui(void* arg){
 					break;
 				else if(is_alive(PADDING+cursor_y,PADDING+cursor_x)){
 					death(PADDING+cursor_y,PADDING+cursor_x);
+					attron(COLOR_PAIR(DEAD_COLOR));
 					addch(DEAD);
 				}
 				else{
 					birth(PADDING+cursor_y,PADDING+cursor_x);
+					attron(COLOR_PAIR(ALIVE_COLOR));
 					addch(ALIVE);
 				}
 				move(cursor_y,cursor_x);
@@ -100,12 +102,12 @@ void* ui(void* arg){
 			case NEXT:
 				if(!playing){
 					stepping=true;
-				curs_set(0);
+					curs_set(0);
 				}
 				break;
 		}
-		//TODO: prepare for size change events
 		refresh();
+		//TODO: prepare for size change events
 	}
 	endwin();//clean terminal
 	curs_set(1);//make cursor normal
