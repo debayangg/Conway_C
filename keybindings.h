@@ -14,3 +14,6 @@
 #define CHANGE ' '
 #define PLAY_PAUSE 'p'
 #define NEXT 'n'
+#define FASTER '+'
+#define SLOWER '-'
+#define DEFAULT_SPEED '*'

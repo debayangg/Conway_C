@@ -11,7 +11,7 @@
 //globals
 WINDOW* surface;char* cells;
 unsigned short cursor_x,cursor_y;
-double frame_speed,fps;
+double frame_speed;
 bool playing,running,stepping;
 unsigned short RIGHTMOST,BOTTOMMOST;
 int main(){

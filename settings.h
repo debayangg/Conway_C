@@ -10,5 +10,6 @@
 #define ALIVE_BACKGROUND -1
 #define PADDING 10
 #define DEFAULT_FPS 5.0
+#define SPEED_CHANGE 0.1
 
 #endif

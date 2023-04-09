@@ -93,6 +93,15 @@ void* ui(void* arg){
 				}
 				move(cursor_y,cursor_x);
 				break;
+			case FASTER:
+				frame_speed*=(1.0-SPEED_CHANGE);
+				break;
+			case SLOWER:
+				frame_speed*=(1.0+SPEED_CHANGE);
+				break;
+			case DEFAULT_SPEED:
+				frame_speed=1.0/DEFAULT_FPS;
+				break;
 			case PLAY_PAUSE:
 				curs_set(playing);//change cursor visibility
 				playing=1-playing;
@@ -107,7 +116,6 @@ void* ui(void* arg){
 				break;
 		}
 		refresh();
-		//TODO: prepare for size change events
 	}
 	endwin();//clean terminal
 	curs_set(1);//make cursor normal
