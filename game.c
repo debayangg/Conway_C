@@ -5,7 +5,7 @@
 #include"settings.h"
 #include"controls.h"
 #include"game.h"
-#define IF_ONSCREEN() if(PADDING<=tail->row && tail->row<=ROWS+PADDING && PADDING<=tail->column && tail->column<=COLUMNS+PADDING)
+#define IF_ONSCREEN() if(PADDING<=tail->row && tail->row<=rows+PADDING && PADDING<=tail->column && tail->column<=columns+PADDING)
 typedef struct Change{//linked list node
 	bool new_state;
 	unsigned short row,column;
@@ -43,11 +43,11 @@ void game(){
 			//plan next frame, store Changes
 				//corners
 			rules(0,0,is_alive(0,1)+is_alive(1,1)+is_alive(1,0));//top left
-			rules(0,RIGHTMOST,is_alive(0,RIGHTMOST-1)+is_alive(1,RIGHTMOST-1)+is_alive(1,RIGHTMOST));//top right
-			rules(BOTTOMMOST,0,is_alive(BOTTOMMOST,1)+is_alive(BOTTOMMOST-1,1)+is_alive(BOTTOMMOST-1,0));//bottom left
-			rules(BOTTOMMOST,RIGHTMOST,is_alive(BOTTOMMOST,RIGHTMOST-1)+is_alive(BOTTOMMOST-1,RIGHTMOST-1)+is_alive(BOTTOMMOST-1,RIGHTMOST));//bottom right
+			rules(0,rightmost,is_alive(0,rightmost-1)+is_alive(1,rightmost-1)+is_alive(1,rightmost));//top right
+			rules(bottommost,0,is_alive(bottommost,1)+is_alive(bottommost-1,1)+is_alive(bottommost-1,0));//bottom left
+			rules(bottommost,rightmost,is_alive(bottommost,rightmost-1)+is_alive(bottommost-1,rightmost-1)+is_alive(bottommost-1,rightmost));//bottom right
 				//borders
-			for(short i=1;i<RIGHTMOST;){//horizontal borders
+			for(short i=1;i<rightmost;){//horizontal borders
 				rules(0,i,
 					is_alive(0,i-1)+//left
 					is_alive(1,i-1)+//bottom left
@@ -55,16 +55,16 @@ void game(){
 					is_alive(1,i+1)+//bottom right
 					is_alive(0,i+1)//right
 				);//top border
-				rules(BOTTOMMOST,i,
-					is_alive(BOTTOMMOST,i-1)+//left
-					is_alive(BOTTOMMOST-1,i-1)+//top left
-					is_alive(BOTTOMMOST-1,i)+//top
+				rules(bottommost,i,
+					is_alive(bottommost,i-1)+//left
+					is_alive(bottommost-1,i-1)+//top left
+					is_alive(bottommost-1,i)+//top
 					//'i' is incremented
-					is_alive(BOTTOMMOST-1,++i)+//top right
-					is_alive(BOTTOMMOST,i)//right
+					is_alive(bottommost-1,++i)+//top right
+					is_alive(bottommost,i)//right
 				);//bottom border
 			}
-			for(short i=1;i<BOTTOMMOST;){//vertical borders
+			for(short i=1;i<bottommost;){//vertical borders
 				rules(i,0,
 					is_alive(i-1,0)+//top
 					is_alive(i-1,1)+//top right
@@ -72,18 +72,18 @@ void game(){
 					is_alive(i+1,1)+//bottom right
 					is_alive(i+1,0)//bottom
 				);//left border
-				rules(BOTTOMMOST,i,
-					is_alive(i-1,RIGHTMOST)+//top
-					is_alive(i-1,RIGHTMOST-1)+//top left
-					is_alive(i,RIGHTMOST-1)+//left
+				rules(bottommost,i,
+					is_alive(i-1,rightmost)+//top
+					is_alive(i-1,rightmost-1)+//top left
+					is_alive(i,rightmost-1)+//left
 					//'i' is incremented
-					is_alive(++i,RIGHTMOST-1)+//bottom left
-					is_alive(i,RIGHTMOST)//bottom
+					is_alive(++i,rightmost-1)+//bottom left
+					is_alive(i,rightmost)//bottom
 				);//right border
 			}
 				//interior
-			for(short i=1;i<BOTTOMMOST;i++)
-				for(short j=1;j<RIGHTMOST;j++)
+			for(short i=1;i<bottommost;i++)
+				for(short j=1;j<rightmost;j++)
 					rules(i,j,
 						is_alive(i-1,j-1)+//top left,
 						is_alive(i-1,j)+//left,

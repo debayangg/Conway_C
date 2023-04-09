@@ -11,33 +11,33 @@ void* ui(void* arg){
 				running=FALSE;
 				break;
 			case MOVE_RIGHT:
-				if(cursor_x<COLUMNS)
+				if(cursor_x<columns)
 					move(cursor_y,++cursor_x);
 				else
 					move(cursor_y,cursor_x=0);
 				break;
 			case JUMP_RIGHT:
-				if(cursor_x+JUMP_DISTANCE<COLUMNS)
+				if(cursor_x+JUMP_DISTANCE<columns)
 					move(cursor_y,cursor_x+=JUMP_DISTANCE);
-				else if(cursor_x=COLUMNS)
+				else if(cursor_x=columns)
 					move(cursor_y,cursor_x=0);
 				else 
-					move(cursor_y,cursor_x=COLUMNS);
+					move(cursor_y,cursor_x=columns);
 				break;
 			case END:
-				move(cursor_y,cursor_x=COLUMNS);
+				move(cursor_y,cursor_x=columns);
 				break;
 			case MOVE_LEFT:
 				if(cursor_x>0)
 					move(cursor_y,--cursor_x);
 				else
-					move(cursor_y,cursor_x=COLUMNS);
+					move(cursor_y,cursor_x=columns);
 				break;
 			case JUMP_LEFT:
 				if(cursor_x-JUMP_DISTANCE>0)
 					move(cursor_y,cursor_x-=JUMP_DISTANCE);
 				else if(cursor_x==0)
-					move(cursor_y,cursor_x=COLUMNS);
+					move(cursor_y,cursor_x=columns);
 				else
 					move(cursor_y,cursor_x=0);
 				break;
@@ -48,13 +48,13 @@ void* ui(void* arg){
 				if(cursor_y>0)
 					move(--cursor_y,cursor_x);
 				else
-					move(cursor_y=ROWS,cursor_x);
+					move(cursor_y=rows,cursor_x);
 				break;
 			case JUMP_UP:
 				if(cursor_y-JUMP_DISTANCE>0)
 					move(cursor_y-=JUMP_DISTANCE,cursor_x);
 				else if(cursor_y==0)
-					move(cursor_y=ROWS,cursor_x);
+					move(cursor_y=rows,cursor_x);
 				else
 					move(cursor_y=0,cursor_x);
 				break;
@@ -62,21 +62,21 @@ void* ui(void* arg){
 				move(cursor_y=0,cursor_x);
 				break;
 			case MOVE_DOWN:
-				if(cursor_y>ROWS)
+				if(cursor_y>rows)
 					move(cursor_y=0,cursor_x);
 				else
 					move(++cursor_y,cursor_x);
 				break;
 			case JUMP_DOWN:
-				if(cursor_y+JUMP_DISTANCE<ROWS)
+				if(cursor_y+JUMP_DISTANCE<rows)
 					move(cursor_y+=JUMP_DISTANCE,cursor_x);
-				else if(cursor_y=ROWS)
+				else if(cursor_y=rows)
 					move(cursor_y=0,cursor_x);
 				else
-					move(cursor_y=ROWS,cursor_x);
+					move(cursor_y=rows,cursor_x);
 				break;
 			case BOTTOM:
-				move(cursor_y=ROWS,cursor_x);
+				move(cursor_y=rows,cursor_x);
 				break;
 			case CHANGE:
 				if(playing)

@@ -13,19 +13,21 @@ WINDOW* surface;char* cells;
 unsigned short cursor_x,cursor_y;
 double frame_speed;
 bool playing,running,stepping;
-unsigned short RIGHTMOST,BOTTOMMOST;
+unsigned short rightmost,bottommost,rows,columns;
 int main(){
 	surface=initscr();//create surface
 	start_color();//allow colors
 	use_default_colors();//terminal transparency
 	noecho();//do not show keys
-	RIGHTMOST=COLUMNS+2*PADDING;
-	BOTTOMMOST=ROWS+2*PADDING;
+	rows=surface->_maxy;
+	columns=surface->_maxx;
+	rightmost=columns+2*PADDING;
+	bottommost=rows+2*PADDING;
 	init_pair(ALIVE_COLOR,ALIVE_FOREGROUND,ALIVE_BACKGROUND);
 	init_pair(DEAD_COLOR,DEAD_FOREGROUND,DEAD_BACKGROUND);
-	cells=(char*)calloc((RIGHTMOST/8+1)*(BOTTOMMOST),1);
+	cells=(char*)calloc((rightmost/8+1)*(bottommost),1);
 	attron(COLOR_PAIR(DEAD_COLOR));
-	for(short i=0;i<=(ROWS+1)*(COLUMNS+1);i++)
+	for(short i=0;i<=(rows+1)*(columns+1);i++)
 			addch(DEAD);
 	unsigned short cursor_x=0,cursor_y=0;
 	move(0,0);
